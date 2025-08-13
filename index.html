@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Para Meu Amor ❤️</title>
+
+  <!-- CSS externo (vamos fazer depois) -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- JS externo (vamos fazer depois) -->
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <main>
+
+    <!-- ===== CARROSSEL DE FOTOS ===== -->
+    <section class="carousel" aria-label="Nossas fotos">
+      <div class="carousel__viewport" data-transition="fade">
+        <!-- Coloquei as 11 imagens; como o HTML vai estar na mesma pasta das fotos,
+             usei caminhos relativos. Se preferir subpasta, depois trocamos no CSS/JS. -->
+        <img class="carousel__slide" src="./foto1.jpg"  alt="Foto 1 do casal"  loading="lazy" decoding="async" />
+        <img class="carousel__slide" src="./foto2.jpg"  alt="Foto 2 do casal"  loading="lazy" decoding="async" />
+        <img class="carousel__slide" src="./foto3.jpg"  alt="Foto 3 do casal"  loading="lazy" decoding="async" />
+        <img class="carousel__slide" src="./foto4.jpg"  alt="Foto 4 do casal"  loading="lazy" decoding="async" />
+        <img class="carousel__slide" src="./foto5.jpg"  alt="Foto 5 do casal"  loading="lazy" decoding="async" />
+        <img class="carousel__slide" src="./foto6.jpg"  alt="Foto 6 do casal"  loading="lazy" decoding="async" />
+        <img class="carousel__slide" src="./foto7.jpg"  alt="Foto 7 do casal"  loading="lazy" decoding="async" />
+        <img class="carousel__slide" src="./foto8.jpg"  alt="Foto 8 do casal"  loading="lazy" decoding="async" />
+        <img class="carousel__slide" src="./foto9.jpg"  alt="Foto 9 do casal"  loading="lazy" decoding="async" />
+        <img class="carousel__slide" src="./foto10.jpg" alt="Foto 10 do casal" loading="lazy" decoding="async" />
+        <img class="carousel__slide" src="./foto11.jpg" alt="Foto 11 do casal" loading="lazy" decoding="async" />
+      </div>
+
+      <!-- Setas (funcionam quando ligarmos o JS) -->
+      <button class="carousel__btn carousel__btn--prev" aria-label="Foto anterior">‹</button>
+      <button class="carousel__btn carousel__btn--next" aria-label="Próxima foto">›</button>
+
+      <!-- Pontinhos/indicadores (JS preenche depois, se quisermos) -->
+      <div class="carousel__dots" aria-hidden="true"></div>
+    </section>
+
+    <!-- ===== CRONÔMETRO DO RELACIONAMENTO ===== -->
+    <section class="timer" aria-label="Tempo do nosso amor">
+      <div class="timer__hearts" aria-hidden="true">❤️❤️❤️💗❤️❤️❤️</div>
+      <!-- Data de início no atributo data-start (05/05/2025) -->
+      <p id="contador" class="timer__display" data-start="2025-05-05T00:00:00">
+        0 Anos, 0 Meses, 0 Dias<br />
+        0 Horas, 0 Minutos, 0 Segundos
+      </p>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ===== CAIXA DE TEXTO PRINCIPAL (TEXTÃO) ===== -->
+    <section class="mensagem" aria-label="Mensagem especial">
+      <h2 class="mensagem__titulo">Para você, meu amor</h2>
+      <div class="mensagem__conteudo">
+        <p>
+          Em cada hora, minuto e segundo vividos eu te amei, e te amarei em cada
+          hora, minuto e segundo que está por vir...
+        </p>
+        <!-- Pode colar seu textão aqui dentro; depois a gente estiliza pra ficar grandona e linda -->
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ===== CARROSSEL DE MOTIVOS (TEXTO) ===== -->
+    <section class="motivos" aria-label="Motivos do porquê eu te amo">
+      <header class="motivos__header">
+        <h2>Motivos do porquê eu te amo (resumido)</h2>
+      </header>
+
+      <div class="motivos__viewport" data-transition="fade">
+        <!-- Coloquei exemplos; você pode trocar/adicionar quantos quiser -->
+        <article class="motivo">
+          <p>Seu sorriso muda meu dia.</p>
+        </article>
+        <article class="motivo">
+          <p>Você me faz querer ser melhor.</p>
+        </article>
+        <article class="motivo">
+          <p>Seu abraço é meu lugar favorito.</p>
+        </article>
+        <article class="motivo">
+          <p>Porque a gente é time: eu e você, sempre.</p>
+        </article>
+      </div>
+
+      <!-- Setas do carrossel de motivos -->
+      <button class="motivos__btn motivos__btn--prev" aria-label="Motivo anterior">‹</button>
+      <button class="motivos__btn motivos__btn--next" aria-label="Próximo motivo">›</button>
+
+      <!-- Pontinhos (opcional via JS) -->
+      <div class="motivos__dots" aria-hidden="true"></div>
+    </section>
+
+  </main>
+</body>
+</html>

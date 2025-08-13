@@ -1,0 +1,195 @@
+/* ========= VARS ========= */
+:root{
+  --accent: #ff4d88;
+  --btn-bg: rgba(255, 0, 90, 0.85);
+  --btn-bg-hover: rgba(255, 0, 90, 1);
+  --glass: rgba(0,0,0,0.35);
+}
+
+/* ========= BASE ========= */
+*{ box-sizing:border-box; margin:0; padding:0; }
+
+html, body{
+  height: 100%;
+  min-height: 100vh;
+}
+
+body{
+  font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+  color:#fff;
+  background: #0b0b10 url("./fundo.jpeg") center/cover no-repeat;
+  background-attachment: scroll; /* corrige o scroll do fundo */
+  position: relative; /* cria contexto pro overlay */
+}
+
+/* Overlay escuro por cima do fundo p/ legibilidade */
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);   /* ajuste se quiser mais claro/escuro */
+  pointer-events: none;
+  z-index: 0; /* atrás do conteúdo */
+}
+
+/* garante que todo conteúdo fique acima do overlay */
+main{ position: relative; z-index: 1; padding-bottom: 40px; text-align:center; }
+
+/* ========= CARROSSEL DE FOTOS ========= */
+.carousel{
+  position: relative;
+  max-width: 900px;
+  margin: 24px auto 0;
+  padding: 0 40px;
+}
+
+.carousel__viewport{
+  position: relative;
+  width: 100%;
+  height: clamp(240px, 55vh, 520px);
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: blur(0.5px);
+}
+
+.carousel__slide{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.carousel__slide.active{ opacity: 1; }
+
+.carousel__btn{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--btn-bg);
+  color: #fff;
+  border: none;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+  transition: background .25s ease, transform .1s ease;
+}
+.carousel__btn:hover{ background: var(--btn-bg-hover); }
+.carousel__btn:active{ transform: translateY(-50%) scale(0.96); }
+
+.carousel__btn--prev{ left: 0; }
+.carousel__btn--next{ right: 0; }
+
+/* ========= CRONÔMETRO ========= */
+.timer{
+  margin: 22px auto 8px;
+  max-width: 900px;
+}
+.timer__hearts{ font-size: 1.4rem; margin-bottom: 6px; }
+.timer__display{
+  display: inline-block;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--glass);
+  font-weight: 600;
+  line-height: 1.4;
+  font-size: 1rem;
+}
+
+/* ========= MENSAGEM (TEXTÃO) ========= */
+.mensagem{
+  max-width: 900px;
+  margin: 28px auto;
+  padding: 20px;
+  background: var(--glass);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+  text-align: left;
+}
+.mensagem__titulo{
+  color: var(--accent);
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.mensagem__conteudo{
+  font-size: 1.05rem;
+  line-height: 1.9;
+  text-align: center;
+}
+
+/* ========= MOTIVOS ========= */
+.motivos{
+  position: relative;
+  max-width: 900px;
+  margin: 28px auto;
+  padding: 0 40px;
+}
+.motivos__header h2{
+  color: var(--accent);
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+.motivos__viewport{
+  position: relative;
+  height: clamp(110px, 18vh, 160px);
+  overflow: hidden;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  padding: 10px;
+}
+.motivo{
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 0 16px;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.motivo.active{ opacity: 1; }
+
+.motivos__btn{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--btn-bg);
+  color: #fff;
+  border: none;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+  transition: background .25s ease, transform .1s ease;
+}
+.motivos__btn:hover{ background: var(--btn-bg-hover); }
+.motivos__btn:active{ transform: translateY(-50%) scale(0.96); }
+
+.motivos__btn--prev{ left: 0; }
+.motivos__btn--next{ right: 0; }
+
+/* ========= DIVISOR ========= */
+.divider{
+  border: none;
+  height: 1px;
+  background: rgba(255,255,255,0.25);
+  margin: 18px auto;
+  width: 84%;
+}
+
+/* ========= RESPONSIVO ========= */
+@media (max-width: 768px){
+  .carousel{ padding: 0 32px; }
+  .motivos{ padding: 0 32px; }
+  .timer__display{ font-size: .95rem; }
+  .mensagem__conteudo{ font-size: .98rem; }
+}
