@@ -4,12 +4,11 @@ const prevBtn = document.querySelector('.carousel__btn--prev');
 const nextBtn = document.querySelector('.carousel__btn--next');
 let slideIndex = 0;
 let slideInterval;
+const slideTempo = 8000; // tempo de cada slide (ms)
 
 function showSlide(index) {
-    slides.forEach((slide, i) => {
-        slide.classList.remove('active');
-        if (i === index) slide.classList.add('active');
-    });
+    slides.forEach((slide, i) => slide.classList.remove('active'));
+    slides[index].classList.add('active');
 }
 
 function nextSlide() {
@@ -23,26 +22,16 @@ function prevSlideFunc() {
 }
 
 function startSlideShow() {
-    slideInterval = setInterval(nextSlide, 8000);
+    slideInterval = setInterval(nextSlide, slideTempo);
 }
 
 function stopSlideShow() {
     clearInterval(slideInterval);
 }
 
-prevBtn.addEventListener('click', () => {
-    stopSlideShow();
-    prevSlideFunc();
-    startSlideShow();
-});
+prevBtn.addEventListener('click', () => { stopSlideShow(); prevSlideFunc(); startSlideShow(); });
+nextBtn.addEventListener('click', () => { stopSlideShow(); nextSlide(); startSlideShow(); });
 
-nextBtn.addEventListener('click', () => {
-    stopSlideShow();
-    nextSlide();
-    startSlideShow();
-});
-
-// Inicia
 showSlide(slideIndex);
 startSlideShow();
 
@@ -51,38 +40,20 @@ startSlideShow();
 function atualizarCronometro() {
     const startDate = new Date("2025-05-05T00:00:00");
     const now = new Date();
-    let diff = now - startDate;
 
     let anos = now.getFullYear() - startDate.getFullYear();
     let meses = now.getMonth() - startDate.getMonth();
     let dias = now.getDate() - startDate.getDate();
-
-    if (dias < 0) {
-        meses--;
-        let mesAnterior = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
-        dias += mesAnterior;
-    }
-    if (meses < 0) {
-        anos--;
-        meses += 12;
-    }
+    if (dias < 0) { meses--; dias += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
+    if (meses < 0) { anos--; meses += 12; }
 
     let horas = now.getHours() - startDate.getHours();
     let minutos = now.getMinutes() - startDate.getMinutes();
     let segundos = now.getSeconds() - startDate.getSeconds();
 
-    if (segundos < 0) {
-        segundos += 60;
-        minutos--;
-    }
-    if (minutos < 0) {
-        minutos += 60;
-        horas--;
-    }
-    if (horas < 0) {
-        horas += 24;
-        dias--;
-    }
+    if (segundos < 0) { segundos += 60; minutos--; }
+    if (minutos < 0) { minutos += 60; horas--; }
+    if (horas < 0) { horas += 24; dias--; }
 
     document.getElementById('contador').innerHTML =
         `${anos} Anos, ${meses} Meses, ${dias} Dias<br>` +
@@ -99,12 +70,11 @@ const prevMotivoBtn = document.querySelector('.motivos__btn--prev');
 const nextMotivoBtn = document.querySelector('.motivos__btn--next');
 let motivoIndex = 0;
 let motivoInterval;
+const motivoTempo = 4000; // tempo de cada motivo (ms)
 
 function showMotivo(index) {
-    motivos.forEach((motivo, i) => {
-        motivo.classList.remove('active');
-        if (i === index) motivo.classList.add('active');
-    });
+    motivos.forEach((motivo) => motivo.classList.remove('active'));
+    motivos[index].classList.add('active');
 }
 
 function nextMotivo() {
@@ -118,25 +88,26 @@ function prevMotivoFunc() {
 }
 
 function startMotivoShow() {
-    motivoInterval = setInterval(nextMotivo, 5000);
+    motivoInterval = setInterval(nextMotivo, motivoTempo);
 }
 
 function stopMotivoShow() {
     clearInterval(motivoInterval);
 }
 
-prevMotivoBtn.addEventListener('click', () => {
-    stopMotivoShow();
-    prevMotivoFunc();
-    startMotivoShow();
-});
+prevMotivoBtn.addEventListener('click', () => { stopMotivoShow(); prevMotivoFunc(); startMotivoShow(); });
+nextMotivoBtn.addEventListener('click', () => { stopMotivoShow(); nextMotivo(); startMotivoShow(); });
 
-nextMotivoBtn.addEventListener('click', () => {
-    stopMotivoShow();
-    nextMotivo();
-    startMotivoShow();
-});
-
-// Inicia
 showMotivo(motivoIndex);
 startMotivoShow();
+
+
+// ======== PLAYER DE MÚSICA ======== //
+const audio = document.querySelector('audio');
+
+// Toca automaticamente ao carregar a página
+window.addEventListener('load', () => {
+    audio.play().catch(() => {
+        console.log('Autoplay bloqueado pelo navegador. Usuário precisa interagir para iniciar o áudio.');
+    });
+});
