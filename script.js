@@ -4,10 +4,10 @@ const prevBtn = document.querySelector('.carousel__btn--prev');
 const nextBtn = document.querySelector('.carousel__btn--next');
 let slideIndex = 0;
 let slideInterval;
-const slideTempo = 8000; // tempo de cada slide (ms)
+const slideTempo = 4000; // tempo de cada slide (ms)
 
 function showSlide(index) {
-    slides.forEach((slide, i) => slide.classList.remove('active'));
+    slides.forEach(slide => slide.classList.remove('active'));
     slides[index].classList.add('active');
 }
 
@@ -73,7 +73,7 @@ let motivoInterval;
 const motivoTempo = 4000; // tempo de cada motivo (ms)
 
 function showMotivo(index) {
-    motivos.forEach((motivo) => motivo.classList.remove('active'));
+    motivos.forEach(motivo => motivo.classList.remove('active'));
     motivos[index].classList.add('active');
 }
 
@@ -105,9 +105,13 @@ startMotivoShow();
 // ======== PLAYER DE MÚSICA ======== //
 const audio = document.querySelector('audio');
 
-// Toca automaticamente ao carregar a página
-window.addEventListener('load', () => {
+function tocarAudio() {
     audio.play().catch(() => {
-        console.log('Autoplay bloqueado pelo navegador. Usuário precisa interagir para iniciar o áudio.');
+        console.log('Falha ao tocar o áudio.');
     });
-});
+    // Remove o listener depois do primeiro clique
+    window.removeEventListener('click', tocarAudio);
+}
+
+// Ativa o áudio no primeiro clique do usuário
+window.addEventListener('click', tocarAudio);
